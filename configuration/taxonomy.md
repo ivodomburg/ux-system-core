@@ -1,7 +1,7 @@
 ---
 title: Taxonomy — Generiek UX Kennissysteem
 type: Project Configuration
-version: 2.0
+version: 2.1
 language: nl
 description: Uitgebreide classificatie van bestandstypen voor UX-kennissysteem
 ---
@@ -54,8 +54,10 @@ Beschrijft structuur van systemen, flows en informatie.
 
 Voorbeelden:
 - core_structure
+- knowledge_ontology
 - flow definitions
 - information architecture
+- reference architecture
 
 ---
 
@@ -67,6 +69,8 @@ Voorbeelden:
 - wireframes
 - component specs
 - interaction designs
+- UX doctrines
+- principles overviews
 
 ---
 
@@ -78,6 +82,36 @@ Voorbeelden:
 - user research
 - usability findings
 - analyses
+- journey reviews
+
+---
+
+## Reference Context
+
+Bevat externe kennisbronnen die context geven aan het project.
+
+Voorbeelden:
+- developer documentation summaries
+- platform summaries
+- organization summaries
+
+Eigenschap:
+- feitelijke referentielaag voor analyse en ontwerp
+
+---
+
+## Project Operations
+
+Bevat organisatorische en besluitvormende projectinformatie.
+
+Voorbeelden:
+- meeting notes
+- agenda's en spreekpunten
+- planning
+- goals
+
+Eigenschap:
+- stuurt voortgang en besluitvorming, niet directe UX-oplossing
 
 ---
 
@@ -110,6 +144,8 @@ Voorbeelden:
 - Information Structure  
 - Navigation Model  
 - System Mapping  
+- Reference Architecture
+- Knowledge Ontology
 
 ---
 
@@ -120,6 +156,8 @@ Voorbeelden:
 - Interaction Pattern  
 - Screen Design  
 - State Definition  
+- UX Doctrine
+- Principles Summary
 
 ---
 
@@ -130,6 +168,29 @@ Voorbeelden:
 - Behavioral Insight  
 - Problem Analysis  
 - Evaluation Report  
+- Review & Analysis
+- Journey Review
+
+---
+
+## Reference Context
+
+- Developer Documentation
+- Platform Documentation
+- Organization Documentation
+- External Summary
+
+---
+
+## Project Operations
+
+- Meeting Notes
+- Meeting Preparation
+- Agenda
+- Talking Points
+- Goal Definition
+- Planning Item
+- Decision Log
 
 ---
 
@@ -149,7 +210,9 @@ Voorbeelden:
 2. Methods  
 3. Architecture  
 4. Design Documentation  
-5. UX Analysis  
+5. Reference Context  
+6. UX Analysis  
+7. Project Operations  
 
 Configuratie heeft altijd voorrang.
 
@@ -160,6 +223,7 @@ Configuratie heeft altijd voorrang.
 - Elk bestand krijgt minimaal één type  
 - Subtypes zijn optioneel maar aanbevolen  
 - Interpretatie gebeurt op basis van type + context  
+- Foldercontext mag gebruikt worden als aanvullende classificatiehint  
 
 ---
 
@@ -169,6 +233,7 @@ Configuratie heeft altijd voorrang.
 - Subtypes moeten logisch onder hoofdcategorie vallen  
 - Nieuwe types worden expliciet toegevoegd  
 - Geen projectspecifieke types in core  
+- Overlay mag type-labels gebruiken die mappen op gedefinieerde subtypes  
 
 ---
 
@@ -195,5 +260,6 @@ Zorgen dat:
 - analyses consistenter worden  
 - systeem schaalbaar blijft  
 - hergebruik mogelijk blijft  
+- overlay-bestanden formeel valideerbaar blijven tegen de core  
 
 ---

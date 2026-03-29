@@ -1,7 +1,7 @@
 ---
 title: Method Registry — Generiek UX Kennissysteem
 type: Methods
-version: 2.0
+version: 2.1
 language: nl
 description: Overzicht van toegestane methodes met taxonomy-aware gedrag
 ---
@@ -190,6 +190,8 @@ Output:
 Interpretatieregels:
 
 - controleert type en subtype consistentie  
+- accepteert `type` als hoofdcategorie of als gedefinieerd subtype uit taxonomy  
+- gebruikt foldercontext als aanvullende classificatiehint bij twijfel  
 - detecteert mismatch tussen inhoud en classificatie  
 - controleert relatie met core  
 
@@ -197,6 +199,7 @@ Extra checks:
 
 - ontbrekende categorieën (bijv. design zonder analyse)  
 - conflicten met core_contract  [oai_citation:2‡core_contract.md](sediment://file_00000000e14071f5a90c61fbeac103f4)  
+- periodieke overlay-check: valideer bij nieuwe bestanden, bij typewijzigingen en vóór afronding van grotere updates  
 
 ---
 

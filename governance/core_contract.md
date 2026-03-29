@@ -1,7 +1,7 @@
 ---
 title: Core Contract — Generiek UX Kennissysteem
 type: Project Configuration
-version: 1.1
+version: 1.2
 language: nl
 description: Contract tussen core en overlay voor structuur, gedrag en upgradebaarheid
 ---
@@ -30,6 +30,7 @@ Dit bestand wordt geïnterpreteerd na:
 - purpose  
 - instructions  
 - taxonomy  
+- knowledge-ontology  
 - transfer context  
 
 En vóór:
@@ -114,6 +115,7 @@ De volgende bestanden zijn beschermd:
 - purpose  
 - instructions  
 - taxonomy  
+- knowledge-ontology  
 - transfer_context  
 - core_structure  
 - core_contract  
@@ -133,6 +135,7 @@ Nieuwe functionaliteit wordt toegevoegd via:
 
 - nieuwe methodes (method_registry)  
 - uitbreiding van taxonomy  
+- uitbreiding van knowledge-ontology  
 - uitbreiding van core_structure  
 
 Niet via:
