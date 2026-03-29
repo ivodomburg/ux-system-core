@@ -1,0 +1,329 @@
+---
+title: Method Registry — Generiek UX Kennissysteem
+type: Methods
+version: 2.0
+language: nl
+description: Overzicht van toegestane methodes met taxonomy-aware gedrag
+---
+
+# Method Registry — Generiek UX Kennissysteem
+
+## Doel
+
+Dit bestand definieert alle toegestane methodes die gebruikt mogen worden via:
+
+i: methodenaam
+
+Het zorgt voor:
+
+- gecontroleerd AI-gedrag  
+- consistente output  
+- herbruikbare workflows  
+- semantisch correcte interpretatie van bronnen  
+
+---
+
+## Gebruik
+
+Een methode wordt aangeroepen via:
+
+i: methodenaam
+
+Regels:
+
+- Alleen methodes in deze registry zijn geldig  
+- Bestaat een methode niet → niet uitvoeren  
+- Output volgt altijd de gedefinieerde structuur  
+
+---
+
+## Methode structuur
+
+Elke methode bevat:
+
+- naam  
+- doel  
+- input (optioneel)  
+- output (vorm + regels)  
+- interpretatieregels  
+
+---
+
+# Taxonomy-aware gedrag
+
+Methodes interpreteren bronnen op basis van type en subtype.
+
+## Gewicht per hoofdcategorie
+
+1. Project Configuration → leidend  
+2. Methods → stuurt verwerking  
+3. Architecture → bepaalt structuur  
+4. Design Documentation → concrete uitwerking  
+5. UX Analysis → inzichten en onderbouwing  
+
+## Interpretatie per categorie
+
+### Project Configuration
+- bepaalt gedrag en regels  
+- overschrijft andere interpretaties  
+
+### Methods
+- bepaalt hoe informatie wordt verwerkt  
+- stuurt outputvorm  
+
+### Architecture
+- bepaalt structuur en relaties  
+- is leidend boven design  
+
+### Design Documentation
+- beschrijft concrete oplossingen  
+- heeft hoge specificiteit  
+
+### UX Analysis
+- bevat inzichten, geen harde feiten  
+- moet gecombineerd worden met andere bronnen  
+
+---
+
+# Beschikbare methodes
+
+---
+
+## recap
+
+Naam: recap  
+Doel: snelle context reset  
+
+Output:
+- korte bullets  
+- geen lange tekst  
+
+Interpretatie:
+- geen diepe analyse  
+- alleen samenvatten  
+
+Bron: method-recap.md  [oai_citation:0‡method-recap.md](sediment://file_0000000096e871f4b086e789112fe024)  
+
+---
+
+## analyse
+
+Naam: analyse  
+Doel: inhoud analyseren op basis van meerdere bronnen  
+
+Input:
+- vraag of onderwerp  
+
+Output:
+- gestructureerde analyse  
+- combineert meerdere bronnen  
+- expliciteert aannames  
+
+Interpretatieregels:
+
+- gebruikt altijd meerdere bronnen  
+- herkent type en subtype  
+- weegt bronnen volgens taxonomy  [oai_citation:1‡taxonomy.md](sediment://file_000000007aac7246aafd0c36069ac803)  
+
+Gedrag:
+
+- UX Analysis → inzichten, niet absoluut  
+- Design Documentation → concrete oplossingen  
+- Architecture → structuurleidend  
+- Configuration → bepaalt grenzen  
+
+---
+
+## structure
+
+Naam: structure  
+Doel: structureren van content of systeem  
+
+Input:
+- ongestructureerde of bestaande content  
+
+Output:
+- hiërarchische structuur  
+- logisch gegroepeerd  
+
+Interpretatieregels:
+
+- groepeert op basis van taxonomy  
+- scheidt analyse, design en architectuur  
+- bewaakt consistentie tussen lagen  
+
+---
+
+## generate
+
+Naam: generate  
+Doel: genereren van nieuwe content  
+
+Input:
+- opdracht of type output  
+
+Output:
+- consistente content  
+- afgestemd op bestaande structuur  
+
+Interpretatieregels:
+
+- volgt taxonomy voor type output  
+- respecteert bestaande structuur  
+- introduceert geen nieuwe logica buiten core  
+
+---
+
+## validate
+
+Naam: validate  
+Doel: controleren of iets voldoet aan de core  
+
+Input:
+- bestand of structuur  
+
+Output:
+- voldoet / voldoet niet  
+- afwijkingen  
+- verbeterpunten  
+
+Interpretatieregels:
+
+- controleert type en subtype consistentie  
+- detecteert mismatch tussen inhoud en classificatie  
+- controleert relatie met core  
+
+Extra checks:
+
+- ontbrekende categorieën (bijv. design zonder analyse)  
+- conflicten met core_contract  [oai_citation:2‡core_contract.md](sediment://file_00000000e14071f5a90c61fbeac103f4)  
+
+---
+
+## transform
+
+Naam: transform  
+Doel: omzetten van content naar andere vorm  
+
+Input:
+- broncontent  
+- gewenste vorm  
+
+Output:
+- inhoud blijft gelijk  
+- vorm verandert  
+
+Interpretatieregels:
+
+- behoudt oorspronkelijke betekenis  
+- past vorm aan naar taxonomy  
+
+---
+
+## extend
+
+Naam: extend  
+Doel: uitbreiden van bestaande structuur  
+
+Input:
+- bestaande structuur  
+- uitbreidingsvraag  
+
+Output:
+- consistente uitbreiding  
+
+Interpretatieregels:
+
+- sluit aan op bestaande taxonomy  
+- respecteert core-structuur  [oai_citation:3‡core_structure.md](sediment://file_00000000be107246b0b5bfb80b1a4fcb)  
+
+---
+
+## explain
+
+Naam: explain  
+Doel: uitleggen van onderdelen van het systeem  
+
+Input:
+- vraag of onderdeel  
+
+Output:
+- heldere uitleg  
+- inclusief systeemcontext  
+
+Interpretatieregels:
+
+- gebruikt transfer context voor samenhang  [oai_citation:4‡transfer_context_ux_system.md](sediment://file_0000000045bc71fbbbc0fb61641336d6)  
+- vermijdt losse uitleg zonder systeemcontext  
+
+---
+
+## compare
+
+Naam: compare  
+Doel: vergelijken van opties of structuren  
+
+Input:
+- meerdere varianten  
+
+Output:
+- verschillen  
+- overeenkomsten  
+- implicaties  
+
+Interpretatieregels:
+
+- vergelijkt binnen dezelfde categorie  
+- maakt verschillen expliciet op basis van type  
+
+---
+
+# Methoderegels
+
+## Validatie
+
+- Methoden mogen alleen worden uitgevoerd als ze in deze registry staan  
+- Onbekende methode → expliciet melden  
+
+---
+
+## Consistentie
+
+Methoden volgen altijd:
+
+- purpose  [oai_citation:5‡purpose.md](sediment://file_000000009b1871f4be6d2d67213ff034)  
+- instructions  [oai_citation:6‡instructions.md](sediment://file_00000000b738720aaca7e06497b83be1)  
+- taxonomy  [oai_citation:7‡taxonomy.md](sediment://file_000000007aac7246aafd0c36069ac803)  
+- transfer context  [oai_citation:8‡transfer_context_ux_system.md](sediment://file_0000000045bc71fbbbc0fb61641336d6)  
+- core_contract  [oai_citation:9‡core_contract.md](sediment://file_00000000e14071f5a90c61fbeac103f4)  
+
+---
+
+## Grenzen
+
+- Methoden mogen de core niet wijzigen  
+- Methoden respecteren core-contract  
+- Methoden opereren binnen systeemdefinitie  
+
+---
+
+## Uitbreiding
+
+Nieuwe methodes:
+
+- worden toegevoegd aan deze registry  
+- volgen dezelfde structuur  
+- zijn taxonomy-aware  
+
+---
+
+## Doel van de registry
+
+Zorgen dat:
+
+- AI-interacties voorspelbaar zijn  
+- workflows herbruikbaar zijn  
+- interpretatie semantisch correct is  
+- systeem consistent blijft werken  
+
+---
