@@ -28,6 +28,7 @@ Dit bestand wordt gelezen na:
 - purpose
 - instructions
 - taxonomy
+- knowledge-ontology
 - transfer context
 
 Dit bestand werkt samen met:
@@ -79,15 +80,18 @@ Functie:
 
 ### 2. Governance and structure layer
 
-Deze laag borgt structuur, grenzen en uitbreidbaarheid.
+Deze laag borgt structuur, grenzen, uitbreidbaarheid en kenniscirculatie.
 
 Bestanden:
 
+- knowledge-ontology
 - core_structure
 - core_contract
 
 Functie:
 
+- definieert de kennisontologie en relaties tussen bestandstypen
+- beschrijft hoe kennis circuleert in het systeem
 - definieert de opbouw van de core
 - legt grenzen tussen core en overlay vast
 - beschermt de integriteit van het systeem
@@ -119,6 +123,7 @@ Een geldige generieke core bevat minimaal:
 - purpose.md
 - instructions.md
 - taxonomy.md
+- knowledge-ontology.md
 - transfer_context.md
 - core_structure.md
 - core_contract.md
@@ -180,10 +185,11 @@ De interpretatievolgorde van de core is:
 1. purpose
 2. instructions
 3. taxonomy
-4. transfer_context
-5. core_structure
-6. core_contract
-7. method_registry
+4. knowledge-ontology
+5. transfer_context
+6. core_structure
+7. core_contract
+8. method_registry
 
 Daarna volgt pas de overlay.
 
@@ -254,6 +260,7 @@ De volgende onderdelen moeten zo stabiel mogelijk blijven:
 - purpose
 - instructions
 - taxonomy
+- knowledge-ontology
 - transfer_context
 - core_structure
 - core_contract

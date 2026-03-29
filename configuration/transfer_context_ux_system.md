@@ -32,7 +32,8 @@ Interpretatievolgorde:
 1. purpose → waarom het systeem bestaat  
 2. instructions → hoe AI zich gedraagt  
 3. taxonomy → hoe bestanden worden geïnterpreteerd  
-4. transfer context → hoe het systeem als geheel moet worden begrepen en toegepast  
+4. knowledge-ontology → hoe kennistypen samenhangen en circuleren  
+5. transfer context → hoe het systeem als geheel moet worden begrepen en toegepast  
 
 Daarna volgen:
 - core structuur en contract
