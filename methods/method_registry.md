@@ -1,7 +1,7 @@
 ---
 title: Method Registry — Generiek UX Kennissysteem
 type: Methods
-version: 2.1
+version: 2.2
 language: nl
 description: Overzicht van toegestane methodes met taxonomy-aware gedrag
 ---
@@ -102,7 +102,7 @@ Interpretatie:
 - geen diepe analyse  
 - alleen samenvatten  
 
-Bron: method-recap.md  [oai_citation:0‡method-recap.md](sediment://file_0000000096e871f4b086e789112fe024)  
+Bron: method-recap.md  [oai_citation:0‡method-recap.md](method-recap.md)  
 
 ---
 
@@ -123,7 +123,7 @@ Interpretatieregels:
 
 - gebruikt altijd meerdere bronnen  
 - herkent type en subtype  
-- weegt bronnen volgens taxonomy  [oai_citation:1‡taxonomy.md](sediment://file_000000007aac7246aafd0c36069ac803)  
+- weegt bronnen volgens taxonomy  [oai_citation:1‡taxonomy.md](../configuration/taxonomy.md)  
 
 Gedrag:
 
@@ -198,7 +198,7 @@ Interpretatieregels:
 Extra checks:
 
 - ontbrekende categorieën (bijv. design zonder analyse)  
-- conflicten met core_contract  [oai_citation:2‡core_contract.md](sediment://file_00000000e14071f5a90c61fbeac103f4)  
+- conflicten met core_contract  [oai_citation:2‡core_contract.md](../governance/core_contract.md)  
 - periodieke overlay-check: valideer bij nieuwe bestanden, bij typewijzigingen en vóór afronding van grotere updates  
 
 ---
@@ -223,6 +223,31 @@ Interpretatieregels:
 
 ---
 
+## mkdocs_export
+
+Naam: mkdocs_export  
+Doel: exporteren van kennisdocumentatie als MkDocs-site in een downloadbare zip  
+
+Input (optioneel):
+
+- scope: `all` | `overlay` | `core` (default: `all`)
+- include/exclude patterns
+
+Output:
+
+- 1 zip-bestand in `export/`
+- bevat `mkdocs.yml` + `docs/` structuur
+
+Interpretatieregels:
+
+- schrijft niets buiten `export/`
+- kopieert/structureert, wijzigt geen broncontent
+- respecteert taxonomy en scope bij selectie en navigatie
+
+Bron: method-mkdocs-export.md  
+
+---
+
 ## extend
 
 Naam: extend  
@@ -238,7 +263,7 @@ Output:
 Interpretatieregels:
 
 - sluit aan op bestaande taxonomy  
-- respecteert core-structuur  [oai_citation:3‡core_structure.md](sediment://file_00000000be107246b0b5bfb80b1a4fcb)  
+- respecteert core-structuur  [oai_citation:3‡core_structure.md](../architecture/core_structure.md)  
 
 ---
 
@@ -256,7 +281,7 @@ Output:
 
 Interpretatieregels:
 
-- gebruikt transfer context voor samenhang  [oai_citation:4‡transfer_context_ux_system.md](sediment://file_0000000045bc71fbbbc0fb61641336d6)  
+- gebruikt transfer context voor samenhang  [oai_citation:4‡transfer_context_ux_system.md](../configuration/transfer_context_ux_system.md)  
 - vermijdt losse uitleg zonder systeemcontext  
 
 ---
@@ -294,11 +319,11 @@ Interpretatieregels:
 
 Methoden volgen altijd:
 
-- purpose  [oai_citation:5‡purpose.md](sediment://file_000000009b1871f4be6d2d67213ff034)  
-- instructions  [oai_citation:6‡instructions.md](sediment://file_00000000b738720aaca7e06497b83be1)  
-- taxonomy  [oai_citation:7‡taxonomy.md](sediment://file_000000007aac7246aafd0c36069ac803)  
-- transfer context  [oai_citation:8‡transfer_context_ux_system.md](sediment://file_0000000045bc71fbbbc0fb61641336d6)  
-- core_contract  [oai_citation:9‡core_contract.md](sediment://file_00000000e14071f5a90c61fbeac103f4)  
+- purpose  [oai_citation:5‡purpose.md](../configuration/purpose.md)  
+- instructions  [oai_citation:6‡instructions.md](../configuration/instructions.md)  
+- taxonomy  [oai_citation:7‡taxonomy.md](../configuration/taxonomy.md)  
+- transfer context  [oai_citation:8‡transfer_context_ux_system.md](../configuration/transfer_context_ux_system.md)  
+- core_contract  [oai_citation:9‡core_contract.md](../governance/core_contract.md)  
 
 ---
 
