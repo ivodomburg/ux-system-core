@@ -1,0 +1,202 @@
+schema:
+  id: knowledge-point
+  version: 2.1.0
+  description: Canonical schema for deterministic knowledge points extracted from overlay markdown files.
+
+document:
+  type: object
+  required:
+    - schema_id
+    - schema_version
+    - source_files
+    - generated_at
+    - knowledge_point
+  additional_properties: false
+  properties:
+    schema_id:
+      type: string
+      const: knowledge-point
+    schema_version:
+      type: string
+      const: 2.1.0
+    source_files:
+      type: array
+      min_items: 1
+      unique_items: true
+      description: Workspace-relative source markdown files that support this knowledge point.
+      items:
+        type: string
+        pattern: ^overlay/.+\.md$
+    source_hash:
+      type: string
+      description: Optional checksum of source markdown to track extraction integrity.
+      pattern: ^[a-f0-9]{32,128}$
+      required: false
+    generated_at:
+      type: string
+      description: Extraction timestamp in ISO-8601 UTC format.
+      pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$
+    generator:
+      type: string
+      description: Optional identifier of extraction method, tool or pipeline.
+      required: false
+    language:
+      type: string
+      enum:
+        - nl
+        - en
+        - mixed
+      default: mixed
+    knowledge_point:
+      $ref: '#/definitions/knowledge_point'
+
+definitions:
+  knowledge_point:
+    type: object
+    required:
+      - id
+      - type
+      - statement
+      - confidence
+      - status
+      - source_refs
+      - applies_to
+      - updated_at
+    additional_properties: false
+    properties:
+      id:
+        type: string
+        description: Stable point id, unique within the file.
+        pattern: ^kp-[a-z0-9-]{3,80}$
+      type:
+        type: string
+        enum:
+          - fact
+          - definition
+          - requirement
+          - constraint
+          - decision
+          - rationale
+          - assumption
+          - hypothesis
+          - observation
+          - opinion
+          - risk
+          - issue
+          - question
+          - action
+          - source-evidence
+      statement:
+        type: string
+        min_length: 8
+        max_length: 500
+        description: One atomic statement only.
+      confidence:
+        type: string
+        enum:
+          - high
+          - medium
+          - low
+      status:
+        type: string
+        enum:
+          - active
+          - draft
+          - superseded
+      applies_to:
+        type: array
+        min_items: 1
+        items:
+          type: string
+          min_length: 2
+          max_length: 120
+        description: Scope labels, for example a portal, persona, flow, component, policy.
+      tags:
+        type: array
+        required: false
+        items:
+          type: string
+          pattern: ^[a-z0-9][a-z0-9-_/]{1,80}$
+      source_refs:
+        type: array
+        min_items: 1
+        description: One or more source references that support this same knowledge point.
+        items:
+          type: object
+          required:
+            - file
+            - heading
+          additional_properties: false
+          properties:
+            file:
+              type: string
+              pattern: ^overlay/.+\.md$
+            heading:
+              type: string
+              min_length: 1
+              max_length: 180
+            quote:
+              type: string
+              required: false
+              max_length: 500
+            line_start:
+              type: integer
+              minimum: 1
+              required: false
+            line_end:
+              type: integer
+              minimum: 1
+              required: false
+      updated_at:
+        type: string
+        pattern: ^\d{4}-\d{2}-\d{2}$
+      owner:
+        type: string
+        required: false
+        max_length: 120
+      rationale_for_classification:
+        type: string
+        required: false
+        max_length: 300
+
+rules:
+  atomicity:
+    - Each knowledge point must contain exactly one claim, not compound statements.
+    - Split combined sentences into multiple points when conjunctions change meaning.
+  typing:
+    - Assign exactly one primary type per point.
+    - Use source-evidence only for citations, not interpretations.
+  traceability:
+    - source_files should contain all unique files referenced in knowledge_point.source_refs.
+    - Prefer source_refs.quote for high-impact requirement, decision, and risk points.
+  lifecycle:
+    - Do not delete superseded points; mark status as superseded and add a replacement point.
+
+example:
+  schema_id: knowledge-point
+  schema_version: 2.1.0
+  source_files:
+    - overlay/doctrines/consent_portaal.md
+    - overlay/reviews/customer-journey-consent-portal.md
+  generated_at: 2026-04-03T10:30:00Z
+  language: nl
+  knowledge_point:
+    id: kp-consent-001
+    type: requirement
+    statement: Gebruikers moeten expliciet toestemming kunnen intrekken zonder support-contact.
+    confidence: high
+    status: active
+    applies_to:
+      - consent-portaal
+      - self-service
+    tags:
+      - consent
+      - ux-requirement
+    source_refs:
+      - file: overlay/doctrines/consent_portaal.md
+        heading: UX Doctrine
+        quote: De gebruiker moet zelfstandig toestemming kunnen beheren.
+      - file: overlay/reviews/customer-journey-consent-portal.md
+        heading: Bevindingen
+        quote: Gebruikers verwachten self-service voor toestemming.
+    updated_at: 2026-04-03

@@ -248,6 +248,42 @@ Bron: method-mkdocs-export.md
 
 ---
 
+## knowledge_extract
+
+Naam: knowledge_extract  
+Doel: markdown in `overlay/` extraheren naar deterministische knowledge-point YAML per knowledge point  
+
+Input (optioneel):
+
+- scope: pad onder `overlay/` (default: `overlay/`)  
+- include/exclude patterns  
+- mode: `full` | `incremental` (default: `incremental`)  
+- recall_profile: `balanced` | `high` (default: `high`)  
+- approval_mode: `per_point` | `batch` (default: `per_point`)  
+
+Output:
+
+- per knowledge point 1 knowledge-point YAML in `overlay/knowledge/<type>/`  
+- bestandsnaam: `<bronnaam>.kp-<volgnummer>.yaml`  
+- schema-conform met `knowledge_point_schema.yaml`  
+
+Interpretatieregels:
+
+- gebruikt exact 1 primair type per knowledge point  
+- splitst samengestelde claims in atomaire punten  
+- gebruikt high-recall multi-pass extractie voor hogere dekking (structureel, normatief, relationeel, restscan)  
+- toont per gevonden point eerst een voorstel en wacht op expliciete gebruikerstoestemming voor create of merge  
+- bewaakt herleidbaarheid met `source_refs` (meerdere bronnen mogelijk)  
+- markeert verouderde punten als `superseded` bij herextractie  
+- controleert eerst op bestaand equivalent knowledge point; bij match alleen bron uitbreiden, geen nieuw bestand  
+- schrijft output centraal weg in `overlay/knowledge/<type>/` op basis van het gekozen primaire type  
+- hanteert dekkingsdrempels zodat normatieve secties, anti-patterns en criteria niet worden overgeslagen  
+- voegt geen nieuwe typecategorieen toe buiten schema-enum  
+
+Bron: method-knowledge-extract.md  
+
+---
+
 ## extend
 
 Naam: extend  
