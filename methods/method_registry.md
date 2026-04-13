@@ -248,6 +248,37 @@ Bron: method-mkdocs-export.md
 
 ---
 
+## confluence_publish
+
+Naam: confluence_publish  
+Doel: kennisdocumentatie uit `overlay/` publiceren en/of updaten als Confluence-paginastructuur  
+
+Input (optioneel):
+
+- scope: `overlay` (vast)
+- include/exclude patterns
+- confluence_base_url, confluence_space_key
+- confluence_parent_page_id (optioneel)
+- confluence_title_prefix (optioneel)
+- confluence_dry_run: `true` | `false` (default: `true`)
+
+Output:
+
+- Confluence-pagina's per sectie uit `overlay/mkdocs_profile.json`
+- upsert-rapport in `export/`
+
+Interpretatieregels:
+
+- gebruikt dezelfde content-mapping principes als `mkdocs_export` via profile + nav lock
+- schrijft lokaal niets buiten `export/`
+- publiceert uitsluitend kennis uit `overlay/`
+- sluit `overlay/meetings` en `overlay/planning` uit
+- ondersteunt upsert-gedrag: bestaande pagina updaten, ontbrekende pagina aanmaken
+
+Bron: method-confluence-publish.md  
+
+---
+
 ## knowledge_extract
 
 Naam: knowledge_extract  

@@ -32,6 +32,7 @@ Regels:
 Implementatie:
 
 - De canonieke implementatie staat in `core/methods/mkdocs_export.py`.
+- Een zuster-variant met dezelfde mappinglogica maar ander publicatiedoel staat in `core/methods/confluence_publish.py`.
 - De inhoud van `mkdocs.yml` wordt opgebouwd uit `overlay/mkdocs_profile.json`.
 - Sectie-indeling is overlay-specifiek; de engine in core is generiek en herbruikbaar.
 - Bij wijzigingen aan exportstructuur of configuratie wordt eerst de Python-implementatie aangepast; deze methode beschrijft alleen doel, input, output en regels.
