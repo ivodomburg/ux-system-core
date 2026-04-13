@@ -29,7 +29,7 @@ def slugify(value: str) -> str:
 
 
 def list_overlay_sources() -> list[Path]:
-    excluded_dirs = {"meetings", "planning"}
+    excluded_dirs = {"meetings", "resources"}
     excluded_files = {"mkdocs_profile.json"}
     result = []
     for file_path in sorted(OVERLAY_ROOT.rglob("*.md")):
@@ -144,7 +144,7 @@ def render_section_page(section: dict, files: list[Path]) -> str:
     return "\n".join(lines).rstrip() + "\n"
 
 
-def mkdocs_yml_from_profile(profile: dict) -> str:
+def mkdocs_yml_from_profile(profile: dict, sections_to_publish: list[dict]) -> str:
     lines = [
         f"site_name: {profile['site_name']}",
         f"site_description: {profile['site_description']}",
@@ -179,7 +179,7 @@ def mkdocs_yml_from_profile(profile: dict) -> str:
         "  - Home:",
     ]
 
-    for section in profile["sections"]:
+    for section in sections_to_publish:
         lines.append(f"      - {section['title']}: {section['doc_path']}")
 
     return "\n".join(lines) + "\n"
@@ -197,13 +197,18 @@ def main() -> None:
     sources = list_overlay_sources()
     assignments = build_assignments(sources, profile)
 
+    sections_to_publish: list[dict] = []
     for section in profile["sections"]:
+        files = sorted(assignments.get(section["id"], []), key=lambda p: p.relative_to(ROOT).as_posix())
+        if not files:
+            continue
+
+        sections_to_publish.append(section)
         out_path = WORK / "docs" / section["doc_path"]
         out_path.parent.mkdir(parents=True, exist_ok=True)
-        files = sorted(assignments.get(section["id"], []), key=lambda p: p.relative_to(ROOT).as_posix())
         out_path.write_text(render_section_page(section, files), encoding="utf-8")
 
-    (WORK / "mkdocs.yml").write_text(mkdocs_yml_from_profile(profile), encoding="utf-8")
+    (WORK / "mkdocs.yml").write_text(mkdocs_yml_from_profile(profile, sections_to_publish), encoding="utf-8")
 
     (WORK / "README_EXPORT.md").write_text(
         "# README_EXPORT\n\n## Gebruik\n1. pip install mkdocs mkdocs-material pymdown-extensions\n2. mkdocs serve\n3. mkdocs build\n",
