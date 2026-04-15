@@ -40,7 +40,7 @@ Elk actiepunt bevat verplicht:
 
 - `scope`: pad onder `overlay/` (default: `overlay/`)
 - `include`: glob patterns (default: `**/*.md`)
-- `exclude`: glob patterns (default: `action_points/**`, `**/archive/**`, `**/*.bak.md`)
+- `exclude`: glob patterns (default: `action_points/**`, `**/archive/**`, `**/*.bak.md`, `**/resources/**`)
 - `mode`: `full` | `incremental` (default: `incremental`)
 - `auto_extract`: `true` | `false` (default: `true`)
 

@@ -265,7 +265,7 @@ def scan_markdown_files(scope: str = "overlay", include: str = "**/*.md",
                        exclude: Optional[List[str]] = None) -> List[str]:
     """Scan for markdown files to extract from."""
     if exclude is None:
-        exclude = ["action_points/**", "**/archive/**", "**/*.bak.md", "**/meetings/**", "**/planning/**"]
+        exclude = ["action_points/**", "**/archive/**", "**/*.bak.md", "**/resources/**"]
     
     scope_path = OVERLAY_ROOT.parent / scope if not scope.startswith("/") else Path(scope)
     if not scope_path.exists():
