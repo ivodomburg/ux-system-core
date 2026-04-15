@@ -398,6 +398,59 @@ Methoden volgen altijd:
 
 - Methoden mogen de core niet wijzigen  
 - Methoden respecteren core-contract  
+
+---
+
+## action_points
+
+Naam: action_points  
+Doel: actiepunten uit `overlay/` deterministisch vastleggen, beheren, prioriteren en verwijderen met behoud van status en traceerbaarheid  
+
+Input (optioneel, depends on sub-method):
+
+- `sub_method`: `extract` | `clear` | `prioritize` | `update_status` (default: `extract`)
+- `scope`: pad onder `overlay/` (default: `overlay/`)
+- `include/exclude`: glob patterns  
+- `mode`: `full` | `incremental` (default: `incremental`)
+- `strategy`: `impact-urgency` | `impact` | `urgency` | `custom` (standaard voor prioritize)
+- `older_than`: aantal dagen (standaard voor clear)
+- `id`: actiepunt-ID (standaard voor update_status)
+- `new_status`: `todo` | `done` (standaard voor update_status)
+
+Output:
+
+- Centrale registratie in `overlay/action_points/action_points.json`
+- Per sub-method:
+  - **extract**: kandidaten tonen met voorstel, wachten op goedkeuring, dan toevoegen
+  - **clear**: gefilterde lijst tonen, wachten op bevestiging, dan verwijderen
+  - **prioritize**: herziene prioriteiten voorstellen, per punt om goedkeuring vragen, dan updaten
+  - **update_status**: oude en nieuwe status tonen, bevestigen, dan updaten
+
+Interpretatieregels:
+
+- **Bron-herkennning**: actiepunten zijn minder formeel dan knowledge points, maar dienen traceerbaar terug te leiden naar bron
+- **Deduplicatie**: controleer eerst of soortgelijk actiepunt bestaat voordat je nieuw punt aanmaakt
+- **Status-behoud**: wijzig status van bestaande punten nooit automatisch; markeer als `superseded`
+- **Export-uitsluiting**: actiepunten **mogen nooit** in mkdocs/confluence exports verschijnen
+- **Case-gevoeligheid**: prioriteiten altijd lowercase (`hoog`, `middel`, `laag`)
+- **Urgentie-vraag**: als urgentie niet uit bron blijkt → vraag altijd manueel
+- **Prioriteitsmatrix**: impact × urgentie bepaalt uiteindelijke prioriteit
+- **Detectie**: zoek automatisch naar patronen:
+  - Onafgevinkte checklists (`[ ]`)
+  - Woorden: "actiepunt", "todo", "action item", "volgende stap", "moet nog", "dient te", "open vraag", "beslissing nodig"
+  - Risico's met mitigatie-acties
+  - Gapanalyses met vervolgacties
+
+Goedkeuringsprotocol:
+
+- Alle acties vereisen expliciete gebruikersgoedkeuring
+- Extract: per kandidaat voorstel tonen → goedkeuring vragen (`approve`, `skip`, `edit`)
+- Clear: kandidaten tonen → bevestiging vragen
+- Prioritize: voorgestelde nieuw prioriteiten per punt bevestigen
+- Update-status: oude en nieuwe status tonen → bevestigen
+- Default gedrag zonder respons: `skip` (niets uitvoeren)
+
+Bron: method-action-points.md  
 - Methoden opereren binnen systeemdefinitie  
 
 ---

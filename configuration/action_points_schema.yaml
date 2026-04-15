@@ -1,0 +1,175 @@
+schema:
+  id: action-point
+  version: 1.0.0
+  description: Canonical schema for action points tracked in overlay/action_points/action_points.json
+
+document:
+  type: object
+  required:
+    - schema_id
+    - schema_version
+    - generated_at
+    - action_points
+  additional_properties: false
+  properties:
+    schema_id:
+      type: string
+      const: action-point-list
+      description: Schema identifier
+
+    schema_version:
+      type: string
+      const: 1.0.0
+      description: Version of this schema
+
+    generated_at:
+      type: string
+      description: Last update timestamp in ISO-8601 UTC format
+      pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$
+
+    generator:
+      type: string
+      description: Optional identifier of tool or method that last updated this file
+      required: false
+
+    action_points:
+      type: array
+      description: List of action points
+      items:
+        $ref: '#/definitions/action_point'
+
+definitions:
+  action_point:
+    type: object
+    required:
+      - id
+      - titel
+      - beschrijving
+      - bron
+      - status
+      - prioriteit
+      - urgentie
+      - aangemaakt_op
+      - gewijzigd_op
+    additional_properties: false
+    properties:
+      id:
+        type: string
+        description: Unique action point identifier
+        pattern: ^ap-\d{4}-\d{3,}$
+        example: ap-2026-001
+
+      titel:
+        type: string
+        description: Descriptive action title (5-10 words)
+        min_length: 5
+        max_length: 100
+
+      beschrijving:
+        type: string
+        description: Short content description (1-2 paragraphs)
+        min_length: 10
+        max_length: 500
+
+      bron:
+        $ref: '#/definitions/source_reference'
+        description: Reference to originating markdown file(s) in overlay/
+
+      status:
+        type: string
+        enum:
+          - todo
+          - done
+        description: Current action status
+        default: todo
+
+      prioriteit:
+        type: string
+        enum:
+          - hoog
+          - middel
+          - laag
+        description: Priority level (case-sensitive, lowercase required)
+
+      urgentie:
+        type: string
+        enum:
+          - onmiddellijk
+          - korttermijn
+          - middellang
+          - langetermijn
+        description: Urgency level (time-sensitive classification)
+
+      impact:
+        type: string
+        enum:
+          - hoog
+          - middel
+          - laag
+        description: Estimated impact when resolved
+        required: false
+
+      aangemaakt_op:
+        type: string
+        description: Creation timestamp (ISO-8601 UTC)
+        pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$
+
+      gewijzigd_op:
+        type: string
+        description: Last modification timestamp (ISO-8601 UTC)
+        pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$
+
+      afgerond_op:
+        type: string
+        description: Completion timestamp if status=done (ISO-8601 UTC), null otherwise
+        pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$|^null$
+        required: false
+
+      opmerking:
+        type: string
+        description: Optional note on resolution or context
+        max_length: 200
+        required: false
+
+  source_reference:
+    type: object
+    required:
+      - bestand
+    properties:
+      bestand:
+        type: string
+        description: Workspace-relative path to markdown source file
+        pattern: ^overlay/.+\.md$
+
+      heading:
+        type: string
+        description: Optional heading in source file where action point originated
+        required: false
+
+      quote:
+        type: string
+        description: Optional exact quote from source that prompted the action point
+        max_length: 300
+        required: false
+
+# Prioriteitsmatrix
+priority_matrix:
+  description: Decision matrix for computing final priority from urgentie + impact
+  table:
+    "Urgentie vs Impact": "Hoog       Middel     Laag"
+    "Onmiddellijk":      "HOOG       HOOG       MIDDEL"
+    "Korttermijn":       "HOOG       MIDDEL     MIDDEL"
+    "Middellang":        "MIDDEL     MIDDEL     LAAG"
+    "Langetermijn":      "MIDDEL     LAAG       LAAG"
+
+# Validatieregels
+validation_rules:
+  - id moet uniek zijn binnen action_points.json
+  - titel en beschrijving mogen niet identiek zijn
+  - If status = done: afgerond_op moet ingevuld zijn
+  - If status = todo: afgerond_op moet null zijn
+  - afgerond_op kan niet verder in toekomst liggen dan huidige timestamp
+  - prioriteit moet altijd lowercase zijn
+  - urgentie moet altijd lowercase zijn
+  - bron.bestand moet verwijzen naar bestaand bestand onder overlay/action_points/ is EXCLUDED
+  - aangemaakt_op en gewijzigd_op mogen niet in toekomst liggen

@@ -17,7 +17,7 @@ CONFLUENCE_LOCK_PATH = OVERLAY_ROOT / "confluence_nav_lock.json"
 STAMP = datetime.now().strftime("%Y%m%d-%H%M")
 REPORT_PATH = EXPORT / f"confluence-publish-{STAMP}.json"
 
-EXCLUDED_DIRS = {"meetings", "planning"}
+EXCLUDED_DIRS = {"meetings", "planning", "action_points"}
 EXCLUDED_FILES = {"mkdocs_profile.json"}
 
 

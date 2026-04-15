@@ -29,7 +29,7 @@ def slugify(value: str) -> str:
 
 
 def list_overlay_sources() -> list[Path]:
-    excluded_dirs = {"meetings", "resources"}
+    excluded_dirs = {"meetings", "resources", "action_points"}
     excluded_files = {"mkdocs_profile.json"}
     result = []
     for file_path in sorted(OVERLAY_ROOT.rglob("*.md")):
